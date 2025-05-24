@@ -18,7 +18,6 @@ object AppScanner {
         for (app in apps) {
             val isSystemApp = (app.flags and ApplicationInfo.FLAG_SYSTEM) != 0
             val isUserApp = pm.getLaunchIntentForPackage(app.packageName) != null
-
             val include = when (type) {
                 AppType.USER -> isUserApp && !isSystemApp
                 AppType.SYSTEM -> isSystemApp
@@ -30,9 +29,7 @@ object AppScanner {
                     val packageInfo = pm.getPackageInfo(app.packageName, PackageManager.GET_PERMISSIONS)
                     val permissions = packageInfo.requestedPermissions?.toList() ?: emptyList()
                     val appName = pm.getApplicationLabel(app).toString()
-
                     val (riskLevel, riskScore) = RiskAnalyzer.analyzePermissions(permissions)
-
                     appList.add(
                         AppInfo(
                             appName = appName,
@@ -47,7 +44,6 @@ object AppScanner {
                 }
             }
         }
-
         return appList.sortedBy { it.appName.lowercase() }
     }
 }

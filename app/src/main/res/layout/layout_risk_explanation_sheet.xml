@@ -1,89 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottomSheetRoot"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@android:color/white">
-
-    <TextView
-        android:id="@+id/riskExplanationTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Risk Explanation"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp">
-
-        <TextView
-            android:id="@+id/riskExplanationText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#424242"
-            android:textSize="14sp" />
-    </ScrollView>
-
-    <!-- New AI Suggestion Section -->
-    <TextView
-        android:id="@+id/aiSuggestionTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="AI Suggestion"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="4dp" />
-
-    <TextView
-        android:id="@+id/aiSuggestionText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Loading suggestion..."
-        android:textColor="#424242"
-        android:textSize="14sp"
-        android:layout_marginBottom="16dp" />
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="24dp"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/copyButton"
-            android:layout_width="wrap_content"
+        <!-- Title -->
+        <TextView
+            android:id="@+id/riskExplanationTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copy"
-            android:textSize="14sp"
-            android:layout_marginEnd="12dp"
-            android:backgroundTint="#0288D1"
-            android:textColor="@android:color/white"/>
+            android:text="Risk Explanation"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="12dp"
+            android:fontFamily="sans-serif-medium" />
 
-        <Button
-            android:id="@+id/shareButton"
-            android:layout_width="wrap_content"
+        <!-- Risk Explanation (Expandable) -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share"
-            android:textSize="14sp"
-            android:backgroundTint="#FFA000"
-            android:textColor="@android:color/white"/>
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/riskExplanationContainer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#F5F5F5"
+                android:overScrollMode="never">
+
+                <TextView
+                    android:id="@+id/riskExplanationText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4sp"
+                    android:padding="8dp" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/toggleRiskExplanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show More"
+                android:textColor="#0288D1"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+        <!-- AI Suggestion Title -->
+        <TextView
+            android:id="@+id/aiSuggestionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AI Suggestion"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="4dp"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- AI Suggestion (Expandable) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/aiSuggestionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#F5F5F5"
+                android:overScrollMode="never">
+
+                <TextView
+                    android:id="@+id/aiSuggestionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Loading suggestion..."
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4sp"
+                    android:padding="8dp" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/toggleAiSuggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show More"
+                android:textColor="#0288D1"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+        <!-- Action Buttons Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingTop="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/copyButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Copy"
+                android:textColor="#0288D1"
+                android:layout_marginEnd="12dp"
+                app:icon="@drawable/content_copy"
+                app:strokeColor="#0288D1"
+                app:iconTint="#0288D1"
+                app:cornerRadius="8dp"
+                app:iconPadding="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shareButton"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Share"
+                android:textColor="@android:color/white"
+                app:backgroundTint="#0288D1"
+                app:icon="@drawable/share"
+                app:iconTint="@android:color/white"
+                app:cornerRadius="8dp"
+                app:iconPadding="8dp" />
+        </LinearLayout>
+
+        <!-- Close Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/closeSheetButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Close"
+            android:layout_marginTop="16dp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#0288D1"
+            app:cornerRadius="8dp" />
+
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/closeSheetButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Close"
-        android:backgroundTint="#3AE04B"
-        android:textColor="@android:color/white" />
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

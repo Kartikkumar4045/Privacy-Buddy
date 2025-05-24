@@ -59,4 +59,5 @@ dependencies {
 
     //A-Z
     implementation ("com.simplecityapps:recyclerview-fastscroll:2.0.1")
+
 }

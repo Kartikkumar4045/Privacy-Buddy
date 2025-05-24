@@ -28,7 +28,8 @@ class AppDetailActivity : AppCompatActivity() {
         val packageText = findViewById<TextView>(R.id.detailPackage)
         val riskText = findViewById<TextView>(R.id.detailRisk)
         val permissionsText = findViewById<TextView>(R.id.detailPermissions)
-        val explanationText = findViewById<TextView>(R.id.detailExplanation) // NEW TextView
+        val explanationText = findViewById<TextView>(R.id.detailExplanation)
+        val explainRiskButton = findViewById<Button>(R.id.explainRiskButton)
 
         appNameText.text = appName
         packageText.text = "Package: $packageName"
@@ -49,6 +50,7 @@ class AppDetailActivity : AppCompatActivity() {
         drawable?.setTint(color)
         riskText.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
 
+        // Permissions
         if (permissions.isEmpty()) {
             permissionsText.text = "No permissions found."
         } else {
@@ -61,16 +63,14 @@ class AppDetailActivity : AppCompatActivity() {
             permissionsText.text = spannableBuilder
         }
 
-        // Set explanation directly
+        // AI-style explanation (simple local version)
         val explanation = RiskAnalyzer.getRiskExplanation(permissions)
         explanationText.text = explanation
 
-
-        val explainRiskButton = findViewById<Button>(R.id.explainRiskButton)
+        // Show AI bottom sheet on button click
         explainRiskButton.setOnClickListener {
             val bottomSheet = RiskExplanationBottomSheet(permissions)
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
-
     }
 }

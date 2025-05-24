@@ -19,6 +19,8 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "Privacy Buddy"
 include(":app")
+
  
